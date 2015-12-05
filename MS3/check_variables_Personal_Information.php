@@ -100,7 +100,9 @@ if (isset($_POST['student_hisplat'])){
 if(isset($_POST['origin_id'])){
 	$origin_id = $_POST['origin_id'];
 } else {
-	$origin_id = NULL;
+	echo "<p> <font color='red'>* Origin status not selected. 
+	</font> <p>";
+	$personalInfoIsComplete = False;
 }
 
 $student_dob = $_POST['bdayYear'] . "-" . $_POST['bdayMonth'] . "-" . $_POST['bdayDay'];
