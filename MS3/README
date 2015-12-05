@@ -30,6 +30,7 @@ the login credentials below.
 To be used with connection.php
 
 
+
 3. CHANGELOG FOR DATABASE SCRIPT:
 -Added user table to hold user/password credentials
 -Divided main Application table into 3 tables, one for each page,

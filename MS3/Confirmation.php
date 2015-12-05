@@ -3,32 +3,6 @@ require "connection.php";
 session_start();
 ?>
 
-<?php
-//prepared statements for app_info table included in message_Application_Information.php
-/* 	$stmt_application_info = mysqli_prepare($conn, "INSERT INTO application_information
-	(application_id, app_financial_aid,app_employer_tuition,app_other_program_apps,
-		app_felony, app_sanctioned) VALUES(?,?,?,?,?,?)");
-	
-	// check connection status
-	if($stmt_application_info==FALSE){die("Error:".mysqli_connect_error());}
-	
-	mysqli_stmt_bind_param($stmt_application_info, 'iiiiii', $app, $fin, $emp_tuition,
-		$other, $fel, $sanct);
-	
-	$app = $_SESSION['application_id'];
-	$fin = '$app_financial_aid';
-	$emp_tuition = '$app_employer_tuition';
-	$other = '$app_other_program_apps';
-	$fel = '$app_felony';
-	$sanct = '$app_sanctioned';
-	
-	
-	mysqli_stmt_execute($stmt_application_info);
-	mysqli_stmt_close($stmt_application_info); */
-
-?>
-
-
 <html> 
 <head>
 	<title>Confirmation</title>
@@ -221,12 +195,12 @@ $row[2].", ",$row[3]." ",$row[4]; } } ?>
 <p style='margin-left:20px;'> US Citizen:
 <?php if (mysqli_num_rows($citizen_result) > 0) 
 { while($row = mysqli_fetch_row($citizen_result)) 
-	{ if ($row[0]=1){echo "Yes";}else{echo "No"; } } } ?>
+	{ if ($row[0]==1){echo "Yes";}else{echo "No"; } } } ?>
 
 <p style='margin-left:20px;'> Native English Speaker:
 <?php if (mysqli_num_rows($native_english_result) > 0) 
 { while($row = mysqli_fetch_row($native_english_result)) 
-	{ if ($row[0]=1){echo "Yes";}else{echo "No"; } } } ?>
+	{ if ($row[0]==1){echo "Yes";}else{echo "No"; } } } ?>
 
 <p style='margin-left:20px;'> Gender:
 <?php if (mysqli_num_rows($gender_result) > 0) 
@@ -243,7 +217,7 @@ $row[2].", ",$row[3]." ",$row[4]; } } ?>
 <p style='margin-left:20px;'> Hispanic/Latino Origin:
 <?php if (mysqli_num_rows($hispanic_result) > 0) 
 { while($row = mysqli_fetch_row($hispanic_result)) 
-	{ if ($row[0]=1){echo "Yes";}else{echo "No"; } } } ?>
+	{ if ($row[0]==1){echo "Yes";}else{echo "No"; } } } ?>
 
 <p style='margin-left:20px;'> Ethnicity:
 <?php if (mysqli_num_rows($ethnicity_result) > 0) 
@@ -252,27 +226,27 @@ $row[2].", ",$row[3]." ",$row[4]; } } ?>
 <p style='margin-left:20px;'> Financial Aid:
 <?php if (mysqli_num_rows($finaid_result) > 0) 
 { while($row = mysqli_fetch_row($finaid_result)) 
-	{ if ($row[0]=1){echo "Yes";}else{echo "No"; } } } ?>
+	{ if ($row[0]==1){echo "Yes";}else{echo "No"; } } } ?>
 
 <p style='margin-left:20px;'> Employer Assitance:
 <?php if (mysqli_num_rows($emp_asst_result) > 0) 
 { while($row = mysqli_fetch_row($emp_asst_result)) 
-	{ if ($row[0]=1){echo "Yes";}else{echo "No"; } } } ?>
+	{ if ($row[0]==1){echo "Yes";}else{echo "No"; } } } ?>
 
 <p style='margin-left:20px;'> Other Programs:
 <?php if (mysqli_num_rows($other_progs_result) > 0) 
 { while($row = mysqli_fetch_row($other_progs_result)) 
-	{ if ($row[0]=1){echo "Yes";}else{echo "No"; } } } ?>
+	{ if ($row[0]==1){echo "Yes";}else{echo "No"; } } } ?>
 
 <p style='margin-left:20px;'> Felony/Misdemeanor:
 <?php if (mysqli_num_rows($felony_result) > 0) 
 { while($row = mysqli_fetch_row($felony_result)) 
-	{ if ($row[0]=1){echo "Yes";}else{echo "No"; } } } ?>
+	{ if ($row[0]==1){echo "Yes";}else{echo "No"; } } } ?>
 
 <p style='margin-left:20px;'> Sanctioned:
 <?php if (mysqli_num_rows($sanctioned_result) > 0) 
 { while($row = mysqli_fetch_row($sanctioned_result)) 
-	{ if ($row[0]=1){echo "Yes";}else{echo "No"; } } } ?>
+	{ if ($row[0]==1){echo "Yes";}else{echo "No"; } } } ?>
 
 <p style='margin-left:20px;'> Educational History: </br>
 <?php if (mysqli_num_rows($ed_hist_result) > 0) 

@@ -8,7 +8,7 @@ $_SESSION['user_id'] = $_POST['user_id'];
 // check login credentials
 $loginIsValid = FALSE;
 
-$user = $_POST['user_id'];
+$user = mysqli_real_escape_string($conn, $_POST['user_id']);
 $pwd = $_POST['user_password'];
 $sql = "SELECT * FROM user WHERE user_id = '$user' and user_password = md5('$pwd')";
 $result = mysqli_query($conn, $sql);
