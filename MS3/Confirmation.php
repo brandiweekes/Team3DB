@@ -147,7 +147,10 @@ $test_result = mysqli_query($conn, $test);
 
     <!-- Print variables below: -->
 
-  
+<h1>Confirmation</h1>  
+
+<h2>New Application:</h2>
+
 <p style='margin-left:20px;'> Student Type: 
 <?php if (mysqli_num_rows($grad_type_result) > 0) 
 { while($row = mysqli_fetch_row($grad_type_result)) { echo $row[0]; } } ?>
@@ -170,6 +173,8 @@ $test_result = mysqli_query($conn, $test);
 
 <?php if (mysqli_num_rows($term_year_result) > 0) 
 { while($row = mysqli_fetch_row($term_year_result)) { echo $row[0]; } } ?>
+
+<h2>Personal Information:</h2>
 
 <p style='margin-left:20px;'> Name:
 <?php if (mysqli_num_rows($name_result) > 0) 
@@ -223,6 +228,8 @@ $row[2].", ",$row[3]." ",$row[4]; } } ?>
 <?php if (mysqli_num_rows($ethnicity_result) > 0) 
 { while($row = mysqli_fetch_row($ethnicity_result)) {echo $row[0]." "; } } ?>
 
+<h2>Application Information:</h2>
+
 <p style='margin-left:20px;'> Financial Aid:
 <?php if (mysqli_num_rows($finaid_result) > 0) 
 { while($row = mysqli_fetch_row($finaid_result)) 
@@ -248,11 +255,15 @@ $row[2].", ",$row[3]." ",$row[4]; } } ?>
 { while($row = mysqli_fetch_row($sanctioned_result)) 
 	{ if ($row[0]==1){echo "Yes";}else{echo "No"; } } } ?>
 
+<h2>Educational History:</h2>
+
 <p style='margin-left:20px;'> Educational History: </br>
 <?php if (mysqli_num_rows($ed_hist_result) > 0) 
 { while($row = mysqli_fetch_row($ed_hist_result)) 
 	{echo $row[0]." ",$row[1]." ",$row[2]." ",$row[3]." ",
 	$row[4]." ",$row[5]." ",$row[6]." </br>"; } } ?>
+
+<h2>Employment History:</h2>
 
 <p style='margin-left:20px;'> Employment History: </br>
 <?php if (mysqli_num_rows($employment_result) > 0) 
@@ -260,6 +271,8 @@ $row[2].", ",$row[3]." ",$row[4]; } } ?>
 	{echo $row[0]." ",$row[1]." ",$row[2]." ",$row[3]." ",
 	$row[4]." ",$row[5]." ",$row[6].$row[7]." ",$row[8].
 	" ",$row[9]." ",$row[10]." ",$row[11]." </br>"; } } ?>
+	
+<h2>Entrance Tests:</h2>
 
 <p style='margin-left:20px;'> Entrance Tests: </br>
 <?php if (mysqli_num_rows($test_result) > 0) 

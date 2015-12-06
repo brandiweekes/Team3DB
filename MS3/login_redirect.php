@@ -8,15 +8,23 @@ $_SESSION['user_id'] = $_POST['user_id'];
 // check login credentials
 $loginIsValid = FALSE;
 
-$user = mysqli_real_escape_string($conn, $_POST['user_id']);
-$pwd = $_POST['user_password'];
-$sql = "SELECT * FROM user WHERE user_id = '$user' and user_password = md5('$pwd')";
-$result = mysqli_query($conn, $sql);
+$sql = mysqli_prepare($conn, "SELECT user_id, user_password FROM user 
+WHERE user_id = ? and user_password = ?");
+mysqli_stmt_bind_param($sql, "ss", $_POST['user_id'], MD5($_POST['user_password']));
+mysqli_stmt_execute($sql);
+mysqli_stmt_bind_result($sql, $usr, $pwd);
 
-if(mysqli_num_rows($result) > 0) {
-	$loginIsValid = TRUE;
+$count = 0;
+while(mysqli_stmt_fetch($sql)){
+	$count++;
 }
 
+if($count > 0){
+	$loginIsValid = TRUE;
+	$_SESSION['user_id'] = $usr;
+}
+
+// if login isn't valid, go back to Login page, otherwise redirect
 if(!$loginIsValid){
 	goTo_Login();
 } else{
@@ -148,7 +156,7 @@ function goTo_newApplication(){
     exit();
 }
 
-mysqli_free_result($result);
+mysqli_stmt_close($sql);
 mysqli_close($conn);
 
 ?>

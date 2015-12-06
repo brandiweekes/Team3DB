@@ -78,7 +78,6 @@ military_id CHAR(2) NOT NULL UNIQUE,
 military_description VARCHAR(15) NOT NULL,
 PRIMARY KEY(military_id)
 ) ENGINE = INNODB;
-INSERT INTO military_branch VALUES('AA', 'Not Applicable');
 INSERT INTO military_branch VALUES('AR', 'Army');
 INSERT INTO military_branch VALUES('MC', 'Marine Corp');
 INSERT INTO military_branch VALUES('NA', 'Navy');
@@ -202,7 +201,7 @@ degree_id VARCHAR(6) NOT NULL,
 desired_major_id VARCHAR(6) NOT NULL,
 term_season_id VARCHAR(6) NOT NULL,
 term_year_id CHAR(2) NOT NULL,
-PRIMARY KEY (application_id, user_id),
+PRIMARY KEY (application_id),
 FOREIGN KEY (user_id) REFERENCES user(user_id),
 FOREIGN KEY (grad_type_id) REFERENCES graduate_type(grad_type_id),
 FOREIGN KEY (college_id) REFERENCES college(college_id),
@@ -214,7 +213,6 @@ FOREIGN KEY (term_year_id) REFERENCES term_year(term_year_id)
 
 CREATE TABLE personal_information (
 application_id INT NOT NULL,
-user_id VARCHAR(16) NOT NULL,
 student_fname VARCHAR(25) NOT NULL, 
 student_lname VARCHAR(25) NOT NULL,
 student_initial CHAR(1),
@@ -232,9 +230,8 @@ gender_id CHAR(1) NOT NULL,
 vet_status_id CHAR(2) NOT NULL,
 military_id CHAR(2),
 hisplat TINYINT(1) NOT NULL,
-PRIMARY KEY (application_id, user_id),
+PRIMARY KEY (application_id),
 FOREIGN KEY (application_id) REFERENCES new_application(application_id),
-FOREIGN KEY (user_id) REFERENCES new_application(user_id),
 FOREIGN KEY (state_id) REFERENCES state(state_id),
 FOREIGN KEY (gender_id) REFERENCES gender(gender_id),
 FOREIGN KEY (vet_status_id) REFERENCES veteran_status(vet_status_id),
@@ -243,20 +240,17 @@ FOREIGN KEY (military_id) REFERENCES military_branch(military_id)
 
 CREATE TABLE application_information (
 application_id INT NOT NULL,
-user_id VARCHAR(16) NOT NULL,
 app_financial_aid TINYINT(1) NOT NULL,
 app_employer_tuition TINYINT(1) NOT NULL,
 app_other_program_apps TINYINT(1) NOT NULL,
 app_felony TINYINT(1) NOT NULL,
 app_sanctioned TINYINT(1) NOT NULL,
-PRIMARY KEY (application_id, user_id),
-FOREIGN KEY (user_id) REFERENCES new_application(user_id),
+PRIMARY KEY (application_id),
 FOREIGN KEY (application_id) REFERENCES new_application(application_id)
 ) ENGINE = INNODB;
 
 CREATE TABLE ed_history (
 ed_history_id INT NOT NULL UNIQUE AUTO_INCREMENT,
-user_id VARCHAR(16) NOT NULL,
 application_id INT NOT NULL,
 ed_institution VARCHAR(50) NOT NULL,
 ed_start DATE NOT NULL,
@@ -265,8 +259,7 @@ ed_degree_recd_date DATE NOT NULL,
 ed_major VARCHAR(50) NOT NULL,
 degree_earned_id VARCHAR(6) NOT NULL,
 state_id CHAR(2) NOT NULL,
-PRIMARY KEY(ed_history_id, user_id, application_id),
-FOREIGN KEY(user_id) REFERENCES new_application(user_id),
+PRIMARY KEY(ed_history_id, application_id),
 FOREIGN KEY(application_id) REFERENCES new_application(application_id),
 FOREIGN KEY(degree_earned_id) REFERENCES degree_earned(degree_earned_id),
 FOREIGN KEY(state_id) REFERENCES state(state_id)
@@ -274,23 +267,19 @@ FOREIGN KEY(state_id) REFERENCES state(state_id)
 
 CREATE TABLE applicant_origin (
 application_id INT NOT NULL,
-user_id VARCHAR(16) NOT NULL,
 origin_id CHAR(4) NOT NULL,
-PRIMARY KEY (application_id, user_id, origin_id),
+PRIMARY KEY (application_id, origin_id),
 FOREIGN KEY (application_id) REFERENCES personal_information(application_id),
-FOREIGN KEY (user_id) REFERENCES new_application(user_id),
 FOREIGN KEY (origin_id) REFERENCES origin_type(origin_id)
 ) ENGINE = INNODB;
 
 CREATE TABLE applicant_test (
 application_id INT NOT NULL,
-user_id VARCHAR(16) NOT NULL,
 test_id INT NOT NULL,
 test_year YEAR(4) NOT NULL,
 month_id CHAR(2) NOT NULL,
-PRIMARY KEY (application_id, user_id, test_id),
+PRIMARY KEY (application_id, test_id),
 FOREIGN KEY (application_id) REFERENCES new_application(application_id),
-FOREIGN KEY (user_id) REFERENCES new_application(user_id),
 FOREIGN KEY (test_id) REFERENCES entrance_test(test_id),
 FOREIGN KEY (month_id) REFERENCES month(month_id)
 ) ENGINE = INNODB;
@@ -298,7 +287,6 @@ FOREIGN KEY (month_id) REFERENCES month(month_id)
 CREATE TABLE employer (
 emp_id INT NOT NULL UNIQUE AUTO_INCREMENT,
 application_id INT NOT NULL,
-user_id VARCHAR(16) NOT NULL,
 emp_name VARCHAR(50) NOT NULL,
 emp_occupation VARCHAR(50) NOT NULL,
 emp_startdate DATE NOT NULL,
@@ -311,9 +299,8 @@ emp_city VARCHAR(25) NOT NULL,
 emp_zip CHAR(5) NOT NULL,
 emp_phone CHAR(10) NOT NULL,
 state_id CHAR(2) NOT NULL,
-PRIMARY KEY(emp_id, application_id, user_id),
+PRIMARY KEY(emp_id, application_id),
 FOREIGN KEY(application_id) REFERENCES new_application(application_id),
-FOREIGN KEY(user_id) REFERENCES new_application(user_id),
 FOREIGN KEY(state_id) REFERENCES state(state_id),
 FOREIGN KEY(fptime_id) REFERENCES fptime(fptime_id)
 ) ENGINE = INNODB;
